@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Design Company</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #ffffff;
+      color: #333;
+    }
+
+    body.dark-mode {
+      background-color: #121212;
+      color: #ddd;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      padding: 100px 20px 32px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .box {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      color: inherit;
+    }
+
+    body.dark-mode .box {
+      background-color: #222;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    }
+
+    .header-box {
+      height: 400px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      color: #fff;
+      border-radius: 12px;
+    }
+
+    .header-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    .header-box-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-box h1 {
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+      font-weight: 600;
+      text-transform: lowercase;
+    }
+
+    .header-box .buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .header-box button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      background-color: #0077cc;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .header-box button:hover {
+      background-color: #005fa3;
+    }
+
+    .row {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .row .box {
+      flex: 1;
+      aspect-ratio: 1 / 1;
+      min-width: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(8px);
+      color: #eee;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark-mode .row .box {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ddd;
+      box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+    }
+
+    .row h2 {
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .grid-portfolio {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+    }
+
+    .portfolio-item {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      background: #fff;
+      transition: transform 0.3s ease;
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      display: block;
+    }
+
+    .portfolio-item p {
+      padding: 10px;
+      font-weight: 600;
+      color: #0077cc;
+      text-align: center;
+      background: #f0f8ff;
+    }
+
+    .portfolio-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .process-steps {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .step {
+      flex: 1;
+      min-width: 180px;
+      background: #e6f0fa;
+      padding: 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      text-align: center;
+      color: #0077cc;
+      box-shadow: 0 2px 8px rgba(0, 119, 204, 0.15);
+    }
+
+    body.dark-mode .step {
+      background: #1e2a3a;
+      color: #66aaff;
+      box-shadow: 0 2px 8px rgba(102, 170, 255, 0.3);
+    }
+
+    .testimonial {
+      background: #f9f9f9;
+      border-left: 4px solid #0077cc;
+      margin: 10px 0;
+      padding: 15px 20px;
+      font-style: italic;
+      color: #555;
+      border-radius: 8px;
+    }
+
+    body.dark-mode .testimonial {
+      background: #222;
+      border-color: #66aaff;
+      color: #bbb;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 12px 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      resize: vertical;
+      transition: border-color 0.3s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: #0077cc;
+      outline: none;
+    }
+
+    .contact-form button {
+      padding: 12px 20px;
+      background-color: #0077cc;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background-color: #005fa3;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    body.dark-mode footer {
+      color: #aaa;
+    }
+
+    .floating-menu-wrapper {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      z-index: 1000;
+      background: transparent;
+    }
+
+    .floating-menu-logo {
+      height: 60px;
+      width: auto;
+      user-select: none;
+    }
+
+    .floating-menu {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background-color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      color: #0077cc;
+      font-weight: 600;
+    }
+
+    body.dark-mode .floating-menu {
+      background-color: #222;
+      box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+      color: #66aaff;
+    }
+
+    .floating-menu a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.3s ease;
+    }
+
+    .floating-menu a:hover {
+      color: #005fa3;
+    }
+
+    .dark-mode-toggle {
+      cursor: pointer;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0077cc;
+      transition: color 0.3s ease;
+      user-select: none;
+    }
+
+    body.dark-mode .dark-mode-toggle {
+      color: #66aaff;
+    }
+
+    .dark-mode-toggle svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    @media (max-width: 768px) {
+      .row {
+        flex-direction: column;
+      }
+
+      .row .box {
+        aspect-ratio: auto;
+      }
+
+      .floating-menu-wrapper {
+        left: 10px;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="floating-menu-wrapper">
+    <img src="logo.png" alt="Logo" class="floating-menu-logo" />
+    <nav class="floating-menu" role="navigation" aria-label="Main menu">
+      <a href="#">Home</a>
+      <a href="#">Portfolio</a>
+      <a href="#">Contact</a>
+
+      <div class="dark-mode-toggle" id="darkModeToggle" title="Toggle Dark Mode" aria-label="Toggle Dark Mode" role="button" tabindex="0">
+        <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" >
+          <circle cx="12" cy="12" r="5"/>
+          <g stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </g>
+        </svg>
+        <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display:none;">
+          <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
+        </svg>
+      </div>
+    </nav>
+  </div>
+
+  <div class="container">
+
+    <div class="box header-box" style="background-image: url('Header_image.jpeg');">
+      <div class="header-box-content">
+        <h1>design, optimize, perfect</h1>
+        <div class="buttons">
+          <button>Get Started</button>
+          <button>Learn More</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="box">
+        <h2>Our Services</h2>
+        <p>Creative solutions for branding, web, UX/UI design, and digital presence.</p>
+      </div>
+      <div class="box">
+        <h2>Why Choose Us</h2>
+        <p>We merge creativity and strategy to craft meaningful, high-impact design.</p>
+      </div>
+    </div>
+
+    <div class="box">
+      <h2>Portfolio Highlights</h2>
+      <div class="grid-portfolio">
+        <div class="portfolio-item">
+          <img src="project1.jpg" alt="Project 1" />
+          <p>Corporate Rebranding</p>
+        </div>
+        <div class="portfolio-item">
+          <img src="project2.jpg" alt="Project 2" />
+          <p>Modern Website UI</p>
+        </div>
+        <div class="portfolio-item">
+          <img src="project3.jpg" alt="Project 3" />
+          <p>Mobile App Interface</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="box">
+      <h2>Our Design Process</h2>
+      <div class="process-steps">
+        <div class="step"><strong>1. Discover</strong><br>Understand your goals and challenges.</div>
+        <div class="step"><strong>2. Design</strong><br>Create purposeful visuals and user flows.</div>
+        <div class="step"><strong>3. Develop</strong><br>Translate designs into interactive solutions.</div>
+        <div class="step"><strong>4. Deliver</strong><br>Launch and refine with feedback.</div>
+      </div>
+    </div>
+
+    <div class="box">
+      <h2>What Clients Say</h2>
+      <div class="testimonial">
+        “The team brought our brand to life with a sleek, professional design that truly stands out.”
+        <br><strong>– Sarah M., Tech Founder</strong>
+      </div>
+      <div class="testimonial">
+        “Fast, creative, and deeply invested in quality — they exceeded all expectations.”
+        <br><strong>– Mike D., Startup CEO</strong>
+      </div>
+    </div>
+
+    <div class="box">
+      <h2>Contact Us</h2>
+      <form class="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required/>
+        <input type="email" name="email" placeholder="Your Email" required/>
+        <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+
+  </div>
+
+  <footer>
+    &copy; 2025 Design Company. All rights reserved.
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('darkModeToggle');
+    const body = document.body;
+    const iconSun = document.getElementById('iconSun');
+    const iconMoon = document.getElementById('iconMoon');
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      iconSun.style.display = body.classList.contains('dark-mode') ? 'none' : 'block';
+      iconMoon.style.display = body.classList.contains('dark-mode') ? 'block' : 'none';
+    });
+
+    toggleBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleBtn.click();
+      }
+    });
+  </script>
+
+</body>
+</html>
